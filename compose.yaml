@@ -1,0 +1,42 @@
+services:
+  # This service acts as a stand-in for HAW Hamburg and is only intended for
+  # testing purposes. It allows manual remote control via a web interface.
+  #
+  # For remote lab sharing, HAW Hamburg students should implement their own
+  # remote system that sends messages to the right topics.
+  remote:
+    build: remote
+    devices:
+      - /dev
+    environment:
+      MQTT_HOST: ${MQTT_HOST}
+      MQTT_PORT: ${MQTT_PORT:-8883}
+      MQTT_USER: ${MQTT_USER}
+      MQTT_PASS: ${MQTT_PASS}
+      ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-0}
+    network_mode: host
+    privileged: true
+    volumes:
+      - ./remote:/root/ros2_ws:rw
+
+  # This service should be run at HU University of Applied Sciences Utrecht. It
+  # converts ROS messages into serial messages that control the actual servos
+  # and motors, and forwards sensor readings to Hamburg.
+  robot:
+    build: robot
+    privileged: true
+    environment:
+      MQTT_HOST: ${MQTT_HOST}
+      MQTT_PORT: ${MQTT_PORT:-8883}
+      MQTT_USER: ${MQTT_USER}
+      MQTT_PASS: ${MQTT_PASS}
+      ROS_DOMAIN_ID: ${ROS_DOMAIN_ID}
+      TEENSY_DEVICE: ${TEENSY_DEVICE}
+      ARDUINO_DEVICE: ${ARDUINO_DEVICE}
+    network_mode: host
+    devices:
+      - /dev
+
+networks:
+  hamburg: ~
+  utrecht: ~

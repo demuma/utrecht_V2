@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online robotarm controller</title>
+    <style>
+        body, label, input, button {
+            font-family: sans-serif;
+            font-size: 1.4rem;
+        }
+
+        body {
+            margin: 0 auto;
+            max-width: 48rem;
+        }
+
+        fieldset {
+            margin: 1rem 0;
+        }
+
+        form {
+            margin: 0.5rem 0;
+        }
+
+        label {
+            display: inline-block;
+            min-width: 9rem;
+        }
+
+        input {
+            text-align: right;
+            width: 5rem;
+        }
+    </style>
+    <script>
+        function onSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const pwmValue = form.querySelector('input[name="pwm"]').value;
+            fetch(form.action, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({pwm: pwmValue})
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.text();
+                });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Attach submit event listeners to all forms
+            const forms = document.querySelectorAll("form");
+            forms.forEach(form => form.addEventListener("submit", onSubmit));
+
+            // Auto-update sensor data
+            setInterval(async () => {
+                try {
+                    const response = await fetch("/sensors");
+                    if (response.ok) {
+                        const data = await response.json();
+
+                        document.getElementById("sensors").innerHTML = Object.entries(data)
+                            .map(([key, value]) => {
+                                return `
+                                    <div class="telemetry">
+                                        <label for="${key}">${key}</label>
+                                        <input type="text" id="${key}" readonly value="${value}"/>
+                                    </div>
+                                `;
+                            })
+                            .join('');
+
+                    } else {
+                        console.error(`Failed to fetch sensor data`);
+                    }
+                } catch (error) {
+                    console.error(`Error fetching sensor data:`, error);
+                }
+            }, 1000);
+        });
+    </script>
+</head>
+<body>
+<h1>Online robotarm controller</h1>
+
+<fieldset>
+    <form action="/motor">
+        <label for="motor">Motor</label>
+        <input id="motor" name="pwm" type="number" min="1200" max="1500" step="10" value="1500"/>
+        <button type="submit">Update</button>
+        1200=max 1500=off
+    </form>
+</fieldset>
+
+<fieldset>
+    <form action="/servo/1">
+        <label for="servo1">Servo 1</label>
+        <input id="servo1" name="pwm" type="number" min="1000" max="2000" step="10" value="1500"/>
+        <button type="submit">Update</button>
+        left=1000 close=1500 right=2000
+    </form>
+
+    <form action="/servo/2">
+        <label for="servo2">Servo 2</label>
+        <input id="servo2" name="pwm" type="number" min="1000" max="2000" step="10" value="1500"/>
+        <button type="submit">Update</button>
+        left=1000 close=1500 right=2000
+    </form>
+
+    <form action="/servo/3">
+        <label for="servo3">Servo 3</label>
+        <input id="servo3" name="pwm" type="number" min="1000" max="2000" step="10" value="1500"/>
+        <button type="submit">Update</button>
+        left=1000 close=1500 right=2000
+    </form>
+
+    <form action="/servo/4">
+        <label for="servo4">Servo 4</label>
+        <input id="servo4" name="pwm" type="number" min="1000" max="2000" step="10" value="1500"/>
+        <button type="submit">Update</button>
+        left=1000 close=1500 right=2000
+    </form>
+
+    <form action="/servo/5">
+        <label for="servo5">Servo 5</label>
+        <input id="servo5" name="pwm" type="number" min="1000" max="2000" step="10" value="1500"/>
+        <button type="submit">Update</button>
+        left=1000 close=1500 right=2000
+    </form>
+
+    <form action="/servo/6">
+        <label for="servo6">Servo 6</label>
+        <input id="servo6" name="pwm" type="number" min="1000" max="2000" step="10" value="1500"/>
+        <button type="submit">Update</button>
+        left=1000 close=1500 right=2000
+    </form>
+</fieldset>
+
+<fieldset id="sensors">
+</fieldset>
+
+</body>
+</html>

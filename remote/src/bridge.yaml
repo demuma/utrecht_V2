@@ -1,0 +1,61 @@
+/**/*:
+  ros__parameters:
+    broker:
+      host: ${MQTT_HOST}
+      port: ${MQTT_PORT}
+      user: ${MQTT_USER}
+      pass: ${MQTT_PASS}
+      tls:
+        enabled: true
+    client:
+      keep_alive_interval: 25.0
+    bridge:
+      ros2mqtt:
+        ros_topics:
+          - /robot/motor_1
+          - /robot/servo_1
+          - /robot/servo_2
+          - /robot/servo_3
+          - /robot/servo_4
+          - /robot/servo_5
+          - /robot/servo_6
+        /robot/motor_1:
+          mqtt_topic: robot/motor_1
+        /robot/servo_1:
+          mqtt_topic: robot/servo_1
+        /robot/servo_2:
+          mqtt_topic: robot/servo_2
+        /robot/servo_3:
+          mqtt_topic: robot/servo_3
+        /robot/servo_4:
+          mqtt_topic: robot/servo_4
+        /robot/servo_5:
+          mqtt_topic: robot/servo_5
+        /robot/servo_6:
+          mqtt_topic: robot/servo_6
+      mqtt2ros:
+        mqtt_topics:
+          - robot/temp_1
+          - robot/beta_1
+          - robot/beta_2
+          - robot/beta_3
+          - robot/gamma
+          - robot/alpha
+          - robot/gripper
+          - robot/buttons
+        robot/temp_1:
+          ros_topic: /robot/temp_1
+        robot/beta_1:
+          ros_topic: /robot/beta_1
+        robot/beta_2:
+          ros_topic: /robot/beta_2
+        robot/beta_3:
+          ros_topic: /robot/beta_3
+        robot/gamma:
+          ros_topic: /robot/gamma
+        robot/alpha:
+          ros_topic: /robot/alpha
+        robot/gripper:
+          ros_topic: /robot/gripper
+        robot/buttons:
+          ros_topic: /robot/buttons
