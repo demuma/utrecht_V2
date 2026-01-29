@@ -1,67 +1,6 @@
 # Docker Compose setup for ROS component
 
 This setup can be used to remotely control a robotic arm via ROS over MQTT.
-
-## Prerequisites
-
-You need a publicly accessible MQTT broker to use this setup. You can create a
-free instance at [CloudAMQP.com] or use an existing broker if you have one.
-
-To create a free CloudAMQP instance, follow these steps:
-
-1. Create an account at [CloudAMQP.com].
-2. From the main dashboard, click on "Create New Instance".
-3. Choose the free “Little Lemur” plan (about halfway in the dropdown list).
-4. Select the nearest AWS region to your location. Ideally EU-Central-1
-   (Frankfurt), but otherwise EU-West-1 (Ireland) or EU-North-1 (Stockholm) is
-   also fine.
-5. Complete the setup and wait for the instance to be created.
-6. Back on the main dashboard, click on the name of your newly created instance.
-7. Scroll down to “MQTT details” and note down the following information:
-   - Hostname (=`MQTT_HOST`)
-   - Port for TLS, usually `8883` (=`MQTT_PORT`)
-   - Username, should look like `abcdefgh:abcdefgh` (=`MQTT_USER`)
-   - Password (=`MQTT_PASS`)
-
-[CloudAMQP.com]: https://www.cloudamqp.com/
-
-## Getting started
-
-This Docker Compose setup consists of several services, which are designed
-to run separately (although they can also be started on the same machine in
-different terminal sessions).
-
-| Service  | Purpose                                                                                                                                                                                                            |
-|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `remote` | This service provides a web interface that can be used to control the arm and view live telemetry. In reality this service would be implemented by HAW Hamburg students. The controller includes an `mqtt-client`. |
-| `robot`  | This service receives commands from “Hamburg” (`remote`) and converts them into MAVROS commands that move the robotic arm. Platforms other than Linux (either native or VM) are not supported.                     |
-
-You should set the credentials for the MQTT broker before running any service.
-
-```bash
-export MQTT_HOST=<insert host here>
-export MQTT_PORT=<insert port here>
-export MQTT_USER=<insert user here>
-export MQTT_PASS=<insert pass here>
-```
-
-### Local development and testing
-
-Run the following command to start the services on the controlling side. This
-includes an example script that starts an admin web server on http://localhost/
-and an MQTT “spy” that is configured to automatically forward messages to an
-MQTT broker.
-
-```bash
-make remote
-```
-
-Then, run the following command on another machine:
-
-```bash
-make robot
-```
-
 You should be able to operate the motor and servos using the web interface.
 
 ### Remotely controlled by HAW Hamburg
