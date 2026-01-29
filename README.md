@@ -115,14 +115,16 @@ Write your own code for controlling the robotic arm and try to push the button.
 
 # Angle Corrections (readings to real angles)
 ## Script --> True sensor values:
-Beta_1= 174+((-32)*(alpha_A-30)/50)<br />
-Beta_2= 69+((67)*(alpha_B+80.8)/82.1)<br />
-Beta_3= 342+((82)*(alpha_C-99.7)/99.7)<br />
-
+```bash
+Beta_1 = 174+((-32)*(alpha_A-30)/50)
+Beta_2=  69+((67)*(alpha_B+80.8)/82.1)
+Beta_3= 342+((82)*(alpha_C-99.7)/99.7)
+```
 ##True sensor values --> script:
-alpha_A= 30+((-50)*(Beta_1-174)/32)<br />
-alpha_B= (-80.8)+((82.1)*(Beta_2-69)/67)<br />
+```bash
+alpha_A= 30+((-50)*(Beta_1-174)/32)
+alpha_B= (-80.8)+((82.1)*(Beta_2-69)/67)
 alpha_C= 99.7+((99.7)*(Beta_3-342)/82)
-
+```
 
 
