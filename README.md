@@ -80,7 +80,7 @@ ros2 topic echo /robot/beta_3 --once
 
 ### Example 4: Use the provided Python script
 ```bash
-cd /root/Documements
+cd /root/ros2_ws/task
 python task.py
 ```
 
