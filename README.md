@@ -43,16 +43,6 @@ make remote
 docker run -it utrecht_V2
 ```
 
-#### Run the Docker with X11
-```bash
-docker run -it \
-    --env="DISPLAY=$DISPLAY" \
-    --env="QT_X11_NO_MITSHM=1"\
-    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --network=host\
-    utrecht_V2
-```
-
 #### Start the MQTT client
 ```bash
 ros2 launch mqtt_client standalone.launch.xml params_file:=/root/Documents/bridge.yaml &
