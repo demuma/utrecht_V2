@@ -120,7 +120,7 @@ Beta_1 = 174+((-32)*(alpha_A-30)/50)
 Beta_2=  69+((67)*(alpha_B+80.8)/82.1)
 Beta_3= 342+((82)*(alpha_C-99.7)/99.7)
 ```
-##True sensor values --> script:
+## True sensor values --> script:
 ```bash
 alpha_A= 30+((-50)*(Beta_1-174)/32)
 alpha_B= (-80.8)+((82.1)*(Beta_2-69)/67)
