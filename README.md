@@ -29,13 +29,13 @@ sends `Float32` messages to the following topics:
 
 #### Clone the repository
 ```bash
-git clone https://github.com/demuma/utrecht
+git clone https://github.com/demuma/utrecht_V2
 ```
 
 #### Build the Docker image
 ```bash
 cd utrecht_V2
-docker build . -t utrecht_V2
+make remote
 ```
 
 #### Run the Docker
@@ -78,10 +78,10 @@ ros2 topic echo /robot/beta_2 --once
 ros2 topic echo /robot/beta_3 --once
 ```
 
-### Example 4: Use the provided Python script
+### Example 4: Use the provided Python scripts as example
 ```bash
-cd /root/ros2_ws/task
-python task.py
+/root/ros2_ws/task/task.py
+/root/ros2_ws/src/remote/remote/remote.py
 ```
 
 ## Re-entering the Docker container
@@ -109,3 +109,8 @@ docker exec -it "$CONTAINER_ID" /bin/bash
 ```bash
 source /opt/ros/humble/setup.bash
 ```
+
+# Task
+Write your own code for controlling the robotic arm. 
+
+
