@@ -51,12 +51,12 @@ ros2 launch mqtt_client standalone.launch.xml params_file:=/root/Documents/bridg
 ## Sending and receiving ROS messages
 ### Example 1: Set hydraulic pump throttle to full
 ```bash
-ros2 topic pub /robot/motor std_msgs/msg/Float32 "data: 1200" -1
+ros2 topic pub /robot/servo_1 std_msgs/msg/Float32 "data: 2000" -1
 ```
 
 ### Example 2: Move servo 1 continuously and get angle
 ```bash
-ros2 topic pub /robot/servo_1 std_msgs/msg/Float32 "data: 1050" -1
+ros2 topic pub /robot/servo_1 std_msgs/msg/Float32 "data: 1300" -1
 ros2 topic echo /robot/beta_1
 ```
 
