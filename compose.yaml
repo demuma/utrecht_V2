@@ -17,7 +17,7 @@ services:
     network_mode: host
     privileged: true
     volumes:
-      - ./task:/root/ros2_ws:rw
+      - ./task:/root/ros2_ws/task:rw
 
   # This service should be run at HU University of Applied Sciences Utrecht. It
   # converts ROS messages into serial messages that control the actual servos
