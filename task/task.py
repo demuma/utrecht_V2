@@ -9,24 +9,24 @@ class HydraulicArmControl(Node):
 
         # Joint angle limits (degrees)
         self.joint_limits = {
-            'gamma': (-45, 45),
-            'beta1': (84, 164),
-            'beta2': (-81, 1),
-            'beta3': (100, 0)  # Note: beta3 limits are reversed
+            'gamma': (-45.0, 45.0),
+            'beta1': (84.0, 164.0),
+            'beta2': (-81.0, 1.0),
+            'beta3': (100.0, 0.0)  # Note: beta3 limits are reversed
         }
 
         # Servo PWM values (extend, neutral, retract)
         self.servo_pwm = {
-            'servo_1': (1740, 1450, 1160),
-            'servo_2': (1150, 1370, 1590),
-            'servo_3': (1130, 1370, 1610),
-            'servo_4': (1360, 1760, 1860)
+            'servo_1': (2000.0, 1500.0, 1000.0),
+            'servo_2': (2000.0, 1500.0, 1000.0),
+            'servo_3': (2000.0, 1500.0, 1000.0),
+            'servo_4': (2000.0, 1500.0, 1000.0)
         }
-        self.servo_min_max = (1100, 2000)
+        self.servo_min_max = (1000.0, 2000.0)
 
         # Hydraulic pressure values
-        self.pressure_init = 860
-        self.pressure_nominal = 1100
+        self.pressure_init = 860.0
+        self.pressure_nominal = 1100.0
 
         # Current joint angles
         self.current_gamma = 0.0
@@ -135,10 +135,10 @@ class HydraulicArmControl(Node):
         Kp_beta3 = 0.5
         
         # Target angles for extending the arm (these need to be tuned)
-        target_gamma = 0.0 # Example target
-        target_beta1 = 164.0  # Fully extend beta1
-        target_beta2 = -81.0 # Fully extend beta2
-        target_beta3 = 0.0  # Fully extend beta3
+        target_gamma = -12.53 # Example target
+        target_beta1 = 152.74  # Fully extend beta1
+        target_beta2 = -54.07 # Fully extend beta2
+        target_beta3 = 79.3  # Fully extend beta3
 
         # --- P Control with Dead Zone Compensation ---
         # Calculate error for each joint
