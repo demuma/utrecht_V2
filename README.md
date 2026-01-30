@@ -32,15 +32,15 @@ sends `Float32` messages to the following topics:
 git clone https://github.com/demuma/utrecht_V2
 ```
 
-#### Build the Docker image
+#### Build and run the Docker image
 ```bash
 cd utrecht_V2
 make remote
 ```
 
-#### Run the Docker
+#### Enter the Docker
 ```bash
-docker run -it utrecht_v2-remote-1
+docker exec -it utrecht_v2-remote-1
 ```
 
 #### Start the MQTT client
