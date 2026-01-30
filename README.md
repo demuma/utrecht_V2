@@ -40,7 +40,7 @@ make remote
 
 #### Run the Docker
 ```bash
-docker run -it utrecht_V2
+docker run -it utrecht_v2-remote-1
 ```
 
 #### Start the MQTT client
