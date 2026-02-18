@@ -14,10 +14,13 @@ services:
       MQTT_USER: ${MQTT_USER}
       MQTT_PASS: ${MQTT_PASS}
       ROS_DOMAIN_ID: ${ROS_DOMAIN_ID:-0}
+      DISPLAY: ${DISPLAY:-:0}
+      QT_X11_NO_MITSHM: "1"
     network_mode: host
     privileged: true
     volumes:
       - ./task:/root/ros2_ws/task:rw
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
 
   # This service should be run at HU University of Applied Sciences Utrecht. It
   # converts ROS messages into serial messages that control the actual servos
